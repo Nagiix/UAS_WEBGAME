@@ -1,6 +1,7 @@
 import { relics } from './relics.js';
 
 export const player = {
+  name: "",
   hp: 100,
   def: 10,
   atk: 15,
@@ -34,6 +35,7 @@ export function gainExperience(amount) {
 }
 
 export function updatePlayerStatsUI() {
+  document.getElementById("player-name").textContent = player.name;
   document.getElementById('player-hp').textContent = player.hp;
   document.getElementById('player-def').textContent = player.def;
   document.getElementById('player-atk').textContent = player.atk;

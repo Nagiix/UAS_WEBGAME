@@ -9,6 +9,7 @@ function createHeader() {
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <a class="navbar-brand" href="#">Mirror Dungeon</a>
       <div class="d-flex align-items-center gap-4 text-white small" id="player-stats">
+        <div class="text-white">👤 <span id="player-name">--</span></div>
         <span>❤️ HP: <span id="player-hp">--</span></span>
         <span>🛡️ DEF: <span id="player-def">--</span></span>
         <span>⚔️ ATK: <span id="player-atk">--</span></span>
@@ -272,4 +273,44 @@ $(document).ready(function () {
   } else {
     console.warn('No relic found or player has no relics');
   }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+
+  loginModal.show();
+
+  loginBtn.onclick = async () => {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("./api/login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (data.status === "success") {
+      player.name = username;
+      localStorage.setItem("username", username);
+      loginModal.hide();
+      showToast("✅ " + data.message);
+    } else {
+      alert("❌ " + data.message);
+    }
+  };
+
+  registerBtn.onclick = async () => {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("./api/register.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    alert(data.message);
+  };
 });

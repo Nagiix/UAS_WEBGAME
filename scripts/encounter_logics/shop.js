@@ -33,7 +33,9 @@ function showShopModal() {
               <tbody>
                 <tr><td>❤️ Heal</td><td>100</td><td><button class="btn btn-sm btn-success buy" data-type="heal">Buy</button></td></tr>
                 <tr><td>🔮 Random Relic</td><td>150</td><td><button class="btn btn-sm btn-warning buy" data-type="relic">Buy</button></td></tr>
+                <tr><td>🔮 Random Relic</td><td>150</td><td><button class="btn btn-sm btn-warning buy" data-type="relic_2">Buy</button></td></tr>
                 <tr><td>🧪 Random Potion</td><td>50</td><td><button class="btn btn-sm btn-info buy" data-type="potion">Buy</button></td></tr>
+                <tr><td>🧪 Random Potion</td><td>50</td><td><button class="btn btn-sm btn-info buy" data-type="potion_2">Buy</button></td></tr>
                 <tr><td>⚔️ +5 ATK</td><td>100</td><td><button class="btn btn-sm btn-danger buy" data-type="atk">Buy</button></td></tr>
                 <tr><td>🛡️ +5 DEF</td><td>100</td><td><button class="btn btn-sm btn-primary buy" data-type="def">Buy</button></td></tr>
               </tbody>
@@ -83,7 +85,9 @@ function purchase(type) {
     relic: 150,
     potion: 50,
     atk: 100,
-    def: 100
+    def: 100,
+    relic_2: 250,
+    potion_2: 75,
   };
 
   if (player.gold < costs[type]) {
@@ -116,6 +120,20 @@ function purchase(type) {
     case "def":
       player.def += 5;
       msg = "🛡️ You feel tougher!";
+      break;
+    case "relic_2":
+      for (let i = 0; i <1; i++){
+        const relic = getRandomRelic();
+        addRelic(relic);
+        msg = `🔮 You obtained <strong>${relic.name}</strong>!`;
+      }
+      break;
+    case "potion_2":
+      for (let i = 0; i <1; i++){
+        const potion = getRandomPotion();
+        addItemToInventory(potion.id);
+        msg = `🧪 You bought <strong>${potion.name}</strong>!`;
+      }
       break;
   }
 
