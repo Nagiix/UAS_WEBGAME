@@ -1,3 +1,5 @@
+import { player } from './scripts/player.js';
+import { relics } from './scripts/relics.js';
 import { updateRelicUI } from './scripts/player.js';
 // Header/Navbar
 function createHeader() {
@@ -238,44 +240,35 @@ function applyLayoutStyles() {
 
 // Init
 
-import { player } from './scripts/player.js';
-import { relics } from './scripts/relics.js';
-window.addEventListener('DOMContentLoaded', () => {
+$(document).ready(function () {
   createHeader();
   createSidebars();
   applyLayoutStyles();
   updateRelicUI();
 
   // Toggle notification
-  const toggleButton = document.getElementById('notifToggle');
-  if (toggleButton) {
-    toggleButton.addEventListener('click', () => {
-      window.notificationsEnabled = !window.notificationsEnabled;
-      document.getElementById('notifStatus').textContent = window.notificationsEnabled ? '🔔 On' : '🔕 Off';
-    });
-  }
+  $('#notifToggle').on('click', function () {
+    window.notificationsEnabled = !window.notificationsEnabled;
+    $('#notifStatus').text(window.notificationsEnabled ? '🔔 On' : '🔕 Off');
+  });
 
   // Debug tooltip for first relic (optional)
-  const relicContainer = document.getElementById('player-relics');
   const relicId = player.relics[0];
   const relic = relics.find(r => r.id === relicId);
 
-  if (relic && relicContainer) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'relic-wrapper';
+  if (relic) {
+    const $wrapper = $('<div>').addClass('relic-wrapper');
+    const $img = $('<img>')
+      .addClass('relic-icon')
+      .attr('src', relic.icon)
+      .attr('alt', relic.name);
 
-    const img = document.createElement('img');
-    img.src = relic.icon;
-    img.alt = relic.name;
-    img.className = 'relic-icon';
+    const $tooltip = $('<div>')
+      .addClass('custom-tooltip')
+      .text(`${relic.name}: ${relic.description}`);
 
-    const tooltip = document.createElement('div');
-    tooltip.className = 'custom-tooltip';
-    tooltip.textContent = `${relic.name}: ${relic.description}`;
-
-    wrapper.appendChild(img);
-    wrapper.appendChild(tooltip);
-    relicContainer.appendChild(wrapper);
+    $wrapper.append($img).append($tooltip);
+    $('#player-relics').append($wrapper);
   } else {
     console.warn('No relic found or player has no relics');
   }
