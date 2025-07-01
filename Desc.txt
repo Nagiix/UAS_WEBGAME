@@ -9,6 +9,7 @@ Mini-Quest
     -> Coop
     -> New Fightscreen
     -> Skills/Scrolls
+    -> Admin Interpreter
 
 Known Bug
     -> Encounter ngeblock modal fight buat reset
