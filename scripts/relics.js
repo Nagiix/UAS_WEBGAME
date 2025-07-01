@@ -10,7 +10,7 @@ export const relics = [
     },
     rarity: "Common",
     category: "Healing",
-    icon : "res/tile000.png",
+    icon : "res/relics/tile000.png",
   },
   {//THIS
     id: 2,
@@ -24,7 +24,7 @@ export const relics = [
     },
     rarity: "Uncommon",
     category: "Offensive",
-    icon : "res/tile001.png",
+    icon : "res/relics/tile001.png",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const relics = [
     },
     rarity: "Common",
     category: "Defensive",
-    icon : "res/tile002.png",
+    icon : "res/relics/tile002.png",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const relics = [
     },
     rarity: "Uncommon",
     category: "Economy",
-    icon : "res/tile003.png",
+    icon : "res/relics/tile003.png",
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ export const relics = [
     passiveTag: "revealMystery",
     rarity: "Rare",
     category: "Utility",
-    icon : "res/tile004.png",
+    icon : "res/relics/tile004.png",
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ export const relics = [
     },
     rarity: "Uncommon",
     category: "Growth",
-    icon : "res/tile005.png",
+    icon : "res/relics/tile005.png",
   },
   {
     id: 7,
@@ -84,7 +84,7 @@ export const relics = [
     },
     rarity: "Uncommon",
     category: "Defensive",
-    icon : "res/tile006.png",
+    icon : "res/relics/tile006.png",
   },
   {
     id: 8,
@@ -96,7 +96,7 @@ export const relics = [
     },
     rarity: "Rare",
     category: "Utility",
-    icon : "res/tile007.png",
+    icon : "res/relics/tile007.png",
   },
   {
     id: 9,
@@ -110,7 +110,7 @@ export const relics = [
     },
     rarity: "Rare",
     category: "Offensive",
-    icon : "res/tile008.png",
+    icon : "res/relics/tile008.png",
   },
   {
     id: 10,
@@ -123,7 +123,7 @@ export const relics = [
     },
     rarity: "Rare",
     category: "Offensive",
-    icon : "res/tile009.png",
+    icon : "res/relics/tile009.png",
   },
   {
     id: 11,
@@ -140,7 +140,7 @@ export const relics = [
     },
     rarity: "Epic",
     category: "Defensive",
-    icon : "res/tile010.png",
+    icon : "res/relics/tile010.png",
   },
   {
     id: 12,
@@ -149,7 +149,7 @@ export const relics = [
     passiveTag: "blockFlee",
     rarity: "Uncommon",
     category: "Utility",
-    icon : "res/tile011.png",
+    icon : "res/relics/tile011.png",
   },
   {
     id: 13,
@@ -158,7 +158,7 @@ export const relics = [
     passiveTag: "burnBoost",
     rarity: "Rare",
     category: "Offensive",
-    icon : "res/tile012.png",
+    icon : "res/relics/tile012.png",
   },
   {
     id: 14,
@@ -170,7 +170,7 @@ export const relics = [
     },
     rarity: "Epic",
     category: "Offensive",
-    icon : "res/tile013.png",
+    icon : "res/relics/tile013.png",
   },
   {
     id: 15,
@@ -182,7 +182,7 @@ export const relics = [
     },
     rarity: "Uncommon",
     category: "Economy",
-    icon : "res/tile014.png",
+    icon : "res/relics/tile014.png",
   },
   {
     id: 16,
@@ -191,7 +191,7 @@ export const relics = [
     passiveTag: "extraSkillSlot",
     rarity: "Rare",
     category: "Utility",
-    icon : "res/tile015.png",
+    icon : "res/relics/tile015.png",
   },
   {
     id: 17,
@@ -200,7 +200,7 @@ export const relics = [
     passiveTag: "identifyItems",
     rarity: "Uncommon",
     category: "Utility",
-    icon : "res/tile016.png",
+    icon : "res/relics/tile016.png",
   },
   {
     id: 18,
@@ -216,7 +216,7 @@ export const relics = [
     },
     rarity: "Epic",
     category: "Defensive",
-    icon : "res/tile017.png",
+    icon : "res/relics/tile017.png",
   },
   {
     id: 19,
@@ -228,7 +228,7 @@ export const relics = [
     },
     rarity: "Rare",
     category: "Offensive",
-    icon : "res/tile018.png",
+    icon : "res/relics/tile018.png",
   },
   {
     id: 20,
@@ -245,7 +245,7 @@ export const relics = [
     },
     rarity: "Legendary",
     category: "Healing",
-    icon : "res/tile019.png",
+    icon : "res/relics/tile019.png",
   }
 ];
 

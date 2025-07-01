@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       echo json_encode([
     "status" => "success",
     "message" => "Login successful",
-    "nickname" => $user["nickname"] ?? ""
+    "nickname" => $user["nickname"] ?? "",
+    "id" => (int)$user["id"] 
   ]);
     } else {
       echo json_encode(["status" => "error", "message" => "Invalid password"]);

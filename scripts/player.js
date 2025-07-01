@@ -3,7 +3,7 @@ import { relics } from './relics.js';
 export const player = {
   name: '',
   nickname: '',
-  hp: 100,
+  hp: 1,
   def: 10,
   atk: 15,
   gold: 1050,
@@ -13,7 +13,8 @@ export const player = {
   difficulty: 1,
   relics: [], // array of relic ids
   skills: [],
-  inventory: []
+  inventory: [],
+  id:1
 };
 // ✅ Leveling configuration
 const levelXpRequirements = level => 50 + level * 25; // Example: Level 1 → 75 XP, Level 2 → 100 XP...

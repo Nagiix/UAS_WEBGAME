@@ -300,6 +300,7 @@ registerBtn.onclick = () => {
 
     if (data.status === "success") {
       player.name = username;
+      player.id = data.id;
       localStorage.setItem("username", username);
 
       loginModal.hide();

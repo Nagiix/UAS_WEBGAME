@@ -5,7 +5,7 @@ import { potions } from "../potions.js";
 export function handleNodeAction(node) {
   const rand = Math.random();
   let message = "";
-
+    console.log(rand)
   if (rand < 0.10) {
     // 10% Gain 1 relic
     const relic = getRandomRelic();

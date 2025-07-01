@@ -125,7 +125,7 @@
         <ul id="win-relics" class="list-group list-group-flush"></ul>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+<button class="btn btn-primary" onclick="restartGame()">Play Again</button>
       </div>
     </div>
   </div>
@@ -219,6 +219,41 @@
         <div class="d-flex justify-content-end">
           <button class="btn btn-link text-secondary small" id="registerBtn">Don't have an account? Register</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="scoreboardModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title">🏆 Top Scores</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="scoreboard-list" class="list-group list-group-flush"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="loseModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title">You Lost!</h5>
+      </div>
+      <div class="modal-body">
+        <h6>Stats:</h6>
+        <ul id="lose-stats" class="list-group mb-3"></ul>
+        <h6>Inventory:</h6>
+        <ul id="lose-inventory" class="list-group mb-3"></ul>
+        <h6>Skills:</h6>
+        <ul id="lose-skills" class="list-group mb-3"></ul>
+        <h6>Relics:</h6>
+        <ul id="lose-relics" class="list-group mb-3"></ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="location.reload()">Play Again</button>
       </div>
     </div>
   </div>

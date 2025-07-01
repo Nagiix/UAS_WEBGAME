@@ -142,9 +142,13 @@ function showToast(html) {
     container.style.zIndex = 1055;
     document.body.appendChild(container);
   }
-
+  console.log(html)
   const toast = document.createElement('div');
+  if(html == "❌ Not enough gold!"){
+    toast.className = 'toast align-items-center text-bg-danger border-0 show';
+  }else{
   toast.className = 'toast align-items-center text-bg-success border-0 show';
+  };
   toast.setAttribute('role', 'alert');
   toast.setAttribute('aria-live', 'assertive');
   toast.setAttribute('aria-atomic', 'true');

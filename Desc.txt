@@ -1,0 +1,12 @@
+To-do
+    -> Masalah login muncul saat restart [✅]
+    -> Submit score [✅]
+    -> Batasan Map [✅]
+    -> Polish toast Shop [✅]
+    -> Add functioning lose screen [✅]
+
+Mini-Quest
+    -> Coop
+
+Known Bug
+    -> Encounter ngeblock modal fight buat reset

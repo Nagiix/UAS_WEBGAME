@@ -4,6 +4,7 @@ import { lockPlayer, unlockPlayer, setInFight } from './lock.js';
 import { startGame } from "../map.js";
 import { relics, getRandomRelicByRarity, getRelicDropChance } from "./relics.js";
 import { showWinScreen } from "./win_screen.js";
+import { showLoseScreen } from "./lose_screen.js";
 import { applyBattleStartRelics, applyBossFightBuffs, applyEliteFightEffects, handleVictoryRelics, HandleonDamageTaken, tryPreventDeath } from "./relic_trigger.js";
 
 function createFightLogUI() {
@@ -91,7 +92,7 @@ export function startBasicFight(enemy) {
 
     if (!victory) {
       showDialogue(enemy.dialogue, 'death');
-      showWinScreen()
+      showLoseScreen();
     }
 
     if (victory) {

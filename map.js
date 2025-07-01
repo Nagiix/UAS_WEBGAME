@@ -1,3 +1,11 @@
+//To-do
+//Masalah session dan login [✅]
+//Submit score [✅]
+//Batasan Map [✅]
+
+//Mini-Quest
+//Coop
+
 // === emoji weight and type ===
 import { handleNodeAction as handleEnemy } from './scripts/encounter_logics/enemy.js';
 import { handleNodeAction as handleEncounter } from './scripts/encounter_logics/encounter.js';
@@ -8,7 +16,7 @@ import { handleNodeAction as handleMystery } from './scripts/encounter_logics/my
 import { handleNodeAction as handleShop } from './scripts/encounter_logics/shop.js';
 import { handleNodeAction as handleBoss } from './scripts/encounter_logics/boss.js';
 import { handleNodeAction as handleStart } from './scripts/encounter_logics/start.js';
-import { player, updatePlayerStatsUI, triggerRelicEffect } from './scripts/player.js';
+import { player, updatePlayerStatsUI, triggerRelicEffect, updateRelicUI, updateInventoryUI } from './scripts/player.js';
 import { isPlayerLocked } from './scripts/lock.js';
 import { applyOnFloorStartRelics } from './scripts/relic_trigger.js';
 import { addItemToInventory } from './scripts/player.js';
@@ -316,11 +324,32 @@ cy.on('viewport', () => {
   const pan = cy.pan();
   const zoom = cy.zoom();
 
-  const bgX = pan.x * zoom;
-  const bgY = pan.y * zoom;
+  // Get container size
+  const container = cy.container();
+  const cyWidth = container.clientWidth;
+  const cyHeight = container.clientHeight;
 
+  // Define pan bounds (you can adjust multiplier as needed)
+  const minX = -cyWidth * 0.1;
+  const maxX = cyWidth * 0.7;
+  const minY = -cyHeight * 0.7;
+  const maxY = cyHeight * 0.7;
+
+  // Clamp pan values
+  const clampedX = Math.min(Math.max(pan.x, minX), maxX);
+  const clampedY = Math.min(Math.max(pan.y, minY), maxY);
+
+  // Apply clamped pan if needed
+  if (pan.x !== clampedX || pan.y !== clampedY) {
+    cy.pan({ x: clampedX, y: clampedY });
+  }
+
+  // Adjust background position
+  const bgX = clampedX * zoom;
+  const bgY = clampedY * zoom;
   cyEl.style.backgroundPosition = `${bgX}px ${bgY}px`;
 });
+
   cy.on('tap', 'node', function(evt) {
     const targetDepth = evt.target.data('depth');
     const currentDepth = cy.getElementById(playerPosition).data('depth');
@@ -402,22 +431,45 @@ function updateScoreboard(newScore) {
   // Save back to localStorage
   localStorage.setItem('scoreboard', JSON.stringify(scores));
 }
-
-window.showScoreboard = function () {
-  const scores = JSON.parse(localStorage.getItem('scoreboard')) || [];
-  const list = document.getElementById('scoreboard-list');
-  list.innerHTML = '';
-
-  scores.forEach((entry, index) => {
-    const li = document.createElement('li');
-    li.className = 'list-group-item bg-dark text-white d-flex justify-content-between align-items-center';
-    li.innerHTML = `<span>${entry.name}</span><span>${entry.score}</span>`;
-    list.appendChild(li);
+/* helper to render any array of {name, score, difficulty} objects */
+function renderScoreboard(listData) {
+  const ul = document.getElementById('scoreboard-list');
+  ul.innerHTML = '';
+  listData.forEach((entry, idx) => {
+    ul.insertAdjacentHTML(
+      'beforeend',
+      `<li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center">
+         <span>${idx + 1}. ${entry.name}</span>
+         <span>${entry.score} <small class="text-muted">(${entry.difficulty})</small></span>
+       </li>`
+    );
   });
+}
 
-  const modal = new bootstrap.Modal(document.getElementById('scoreboardModal'));
-  modal.show();
+/* 👉 call this from any “Scoreboard” button */
+window.showScoreboard = function () {
+  fetch('API/submitscore.php?mode=list')          // adjust the query‑string if your PHP expects something else
+    .then(r => {
+      if (!r.ok) throw new Error(r.statusText);
+      return r.json();
+    })
+    .then(serverList => {
+      /* keep a local cache so the board is never empty offline */
+      localStorage.setItem('scoreboard', JSON.stringify(serverList));
+      renderScoreboard(serverList);
+    })
+    .catch(err => {
+      console.warn('⚠️  Could not fetch server scoreboard, falling back to local cache.', err);
+      const cached = JSON.parse(localStorage.getItem('scoreboard')) || [];
+      renderScoreboard(cached);
+    })
+    .finally(() => {
+      /* always open the modal */
+      const modal = new window.bootstrap.Modal(document.getElementById('scoreboardModal'));
+      modal.show();
+    });
 };
+
 function loadScoreboard() {
   fetch('submitscore.php')
     .then(res => res.json())
@@ -448,4 +500,31 @@ function submitScore(name, score, difficulty) {
   .then(res => res.text())
   .then(() => loadScoreboard());
 }
+window.restartGame = function () {
+  // destroy old Cytoscape instance
+  if (cyInstance) {
+    cyInstance.destroy();
+    cyInstance = null;
+  }
+
+  // soft‑reset player stats (keep id / name / nickname)
+  player.hp          = 100;
+  player.def         = 10;
+  player.atk         = 15;
+  player.gold        = 1050;
+  player.level       = 1;
+  player.exp         = 0;
+  player.floor_count = 1;
+  player.relics      = [];
+  player.skills      = [];
+  player.inventory   = [];
+
+  updatePlayerStatsUI();
+  updateRelicUI();
+  updateInventoryUI?.();          // if this helper exists
+
+  // hide win modal & re‑open difficulty selector
+  bootstrap.Modal.getInstance(document.getElementById("winModal"))?.hide();
+  document.getElementById("difficultyModal").style.display = "block";
+};
 window.startGame = startGame;

@@ -1,24 +1,24 @@
 import { player, getPlayerRelics } from './player.js';
 
-export function showWinScreen() {
-  console.log('SHOWING');
+export function showLoseScreen() {
+  console.log('LOSING');
 
-  /* ---------- mapping numeric → string difficulty ---------- */
+  // Mapping difficulty number to string
   const difficultyMap = {
     1: 'easy',
-    2: 'normal',   // change to 'medium' if your PHP also accepts it
+    2: 'normal',
     3: 'hard',
     5: 'impossible'
   };
   const difficulty = difficultyMap[player.difficulty] ?? 'normal';
 
-  /* ---------- clear all existing <ul> content ---------- */
-  ['win-stats', 'win-inventory', 'win-skills', 'win-relics'].forEach(id => {
+  // Clear previous content
+  ['lose-stats', 'lose-inventory', 'lose-skills', 'lose-relics'].forEach(id => {
     document.getElementById(id).innerHTML = '';
   });
 
-  /* ---------- populate stats ---------- */
-  const statsList = document.getElementById('win-stats');
+  // Stats
+  const statsList = document.getElementById('lose-stats');
   ['hp', 'def', 'atk', 'gold', 'level'].forEach(stat => {
     statsList.insertAdjacentHTML(
       'beforeend',
@@ -35,8 +35,8 @@ export function showWinScreen() {
      </li>`
   );
 
-  /* ---------- inventory ---------- */
-  const inventoryList = document.getElementById('win-inventory');
+  // Inventory
+  const inventoryList = document.getElementById('lose-inventory');
   player.inventory.forEach(item => {
     inventoryList.insertAdjacentHTML(
       'beforeend',
@@ -47,8 +47,8 @@ export function showWinScreen() {
     );
   });
 
-  /* ---------- skills ---------- */
-  const skillsList = document.getElementById('win-skills');
+  // Skills
+  const skillsList = document.getElementById('lose-skills');
   player.skills.forEach(skill => {
     skillsList.insertAdjacentHTML(
       'beforeend',
@@ -56,8 +56,8 @@ export function showWinScreen() {
     );
   });
 
-  /* ---------- relics ---------- */
-  const relicsList = document.getElementById('win-relics');
+  // Relics
+  const relicsList = document.getElementById('lose-relics');
   getPlayerRelics().forEach(relic => {
     relicsList.insertAdjacentHTML(
       'beforeend',
@@ -68,7 +68,7 @@ export function showWinScreen() {
     );
   });
 
-  /* ---------- submit score to server ---------- */
+  // Submit score
   const score = player.gold + player.level * 100 + player.hp;
   fetch('API/submitscore.php', {
     method: 'POST',
@@ -80,11 +80,11 @@ export function showWinScreen() {
     })
   })
     .then(r => r.text())
-    .then(txt => console.log('PHP reply:', txt))
-    .catch(err => console.error('❌ Score submit failed:', err));
+    .then(txt => console.log('PHP reply (lose):', txt))
+    .catch(err => console.error('❌ Score submit failed (lose):', err));
 
-  /* ---------- finally show the modal ---------- */
-  const winModalEl = document.getElementById('winModal');
-  const winModal   = new window.bootstrap.Modal(winModalEl, { backdrop: 'static' });
-  winModal.show();
+  // Show lose modal
+  const loseModalEl = document.getElementById('loseModal');
+  const loseModal = new window.bootstrap.Modal(loseModalEl, { backdrop: 'static' });
+  loseModal.show();
 }
