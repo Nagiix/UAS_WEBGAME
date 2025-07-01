@@ -10,6 +10,15 @@ Mini-Quest
     -> New Fightscreen
     -> Skills/Scrolls
     -> Admin Interpreter
+    -> New Assets
+    -> New Animations
+    -> Bot AI
+    -> Skins/Transaksi
+    -> Full Account
+    -> Character walking nodes
+    -> Sounds
+    -> Responsivity
+    -> Clientside Immunity for Data
 
 Known Bug
     -> Encounter ngeblock modal fight buat reset
