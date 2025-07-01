@@ -19,6 +19,7 @@ Mini-Quest
     -> Sounds
     -> Responsivity
     -> Clientside Immunity for Data
+    -> Priveledge level for users
 
 Known Bug
     -> Encounter ngeblock modal fight buat reset
