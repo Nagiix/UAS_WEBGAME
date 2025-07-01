@@ -7,6 +7,8 @@ To-do
 
 Mini-Quest
     -> Coop
+    -> New Fightscreen
+    -> Skills/Scrolls
 
 Known Bug
     -> Encounter ngeblock modal fight buat reset
